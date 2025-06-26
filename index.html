@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hamza Al Ebousi • Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50 text-gray-800 antialiased">
+  <!-- Navigation -->
+  <nav class="bg-blue-100 shadow">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-semibold">Hamza Al Ebousi</h1>
+      <div class="space-x-4">
+        <a href="#projects" class="hover:text-blue-700">Projects</a>
+        <a href="#education" class="hover:text-blue-700">Education</a>
+        <a href="#certs" class="hover:text-blue-700">Certifications</a>
+        <a href="#links" class="hover:text-blue-700">Gaming Profiles</a>
+        <a href="#contact" class="hover:text-blue-700">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="bg-blue-100 py-16">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-2">Aspiring Developer</h2>
+      <p class="text-gray-700 text-lg">Working on fun side projects</p>
+    </div>
+  </header>
+
+  <!-- About Me -->
+  <section id="about" class="bg-blue-50 py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-4">About Me</h2>
+      <p class="text-gray-700 leading-relaxed">
+        I’m a computer science student at the University of Pittsburgh who loves bringing ideas to life with code.  
+        In my spare time you’ll find me lifting weights, playing ranked online videogames, or working on side projects.  
+        I’m always curious, always learning, and excited for what comes next.
+      </p>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="bg-blue-50 max-w-4xl mx-auto py-12 px-4">
+    <h2 class="text-2xl font-semibold mb-6">Key Projects</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-medium mb-2">YouTube Sentiment Analyzer</h3>
+        <p class="text-gray-600 mb-4">
+          Compares video transcript sentiment with user comments to gauge agreement.
+        </p>
+        <a href="https://github.com/yourusername/youtube-sentiment" target="_blank"
+           class="text-blue-600 hover:underline">View on GitHub →</a>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-medium mb-2">Sentiment-Driven Trading Signals</h3>
+        <p class="text-gray-600 mb-4">
+          Scrapes Reddit for stock mentions and generates sentiment score.
+        </p>
+        <a href="https://github.com/yourusername/news-sentiment" target="_blank"
+           class="text-blue-600 hover:underline">View on GitHub →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="bg-blue-50 max-w-4xl mx-auto py-12 px-4">
+    <h2 class="text-2xl font-semibold mb-6">Education</h2>
+    <div class="bg-white p-6 rounded-2xl shadow text-center">
+      <h3 class="text-xl font-medium mb-2">University of Pittsburgh</h3>
+      <p class="text-gray-600 mb-1">Bachelor of Science in Computer Science</p>
+      <p class="text-gray-600 mb-1">Minor in Mathematics</p>
+      <p class="text-gray-600 mb-4">Expected Graduation: 2026</p>
+      <img src="pitt_logo.svg" alt="University of Pittsburgh Logo"
+           class="w-16 mx-auto mb-4"/>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certs" class="bg-blue-50 py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-6">Certifications</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="bg-white p-6 rounded-2xl shadow text-center">
+          <h3 class="text-lg font-medium mb-2">Meta Front-End Developer Professional Certificate</h3>
+          <a href="https://www.coursera.org/account/accomplishments/professional-cert/D3H7BRE3I379"
+             target="_blank"
+             class="inline-block mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Verify Certificate
+          </a>
+          <img src="meta_cert.png" alt="Meta Front-End Developer Certificate"
+               class="w-64 h-auto mx-auto mt-4 rounded-lg border"/>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow text-center">
+          <h3 class="text-lg font-medium mb-2">ISC² Certified in Cybersecurity (CC)</h3>
+          <p class="text-gray-600">Issued: W.I.P.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gaming Profiles -->
+  <section id="links" class="bg-blue-50 py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-6">Gaming Profiles</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="bg-white p-6 rounded-2xl shadow text-center">
+          <h3 class="text-lg font-medium mb-2">League of Legends (OP.GG)</h3>
+          <a href="https://www.op.gg/lol/profile/riot/Equinox-8496" target="_blank"
+             class="text-blue-600 hover:underline">Equinox#8496 on OP.GG</a>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow text-center">
+          <h3 class="text-lg font-medium mb-2">Valorant (Tracker.gg)</h3>
+          <a href="https://tracker.gg/valorant/profile/riot/Equinox%238496/overview" target="_blank"
+             class="text-blue-600 hover:underline">Equinox#8496 on Tracker.gg</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <footer id="contact" class="bg-blue-100 py-8 px-4">
+    <div class="max-w-4xl mx-auto text-center text-gray-600">
+      <p>Email: <a href="mailto:hamzalebousi@gmail.com" class="hover:text-blue-700">hamzalebousi@gmail.com</a></p>
+      <p class="mt-2">&copy; 2025 Hamza Al Ebousi</p>
+    </div>
+  </footer>
+</body>
+</html>
