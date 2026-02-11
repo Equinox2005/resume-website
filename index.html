@@ -1,158 +1,1034 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hamza Al Ebousi • Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    /* ═══ RESET & BASE ══════════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --neon-cyan: #00f0ff;
+      --neon-pink: #ff2d95;
+      --neon-purple: #b44dff;
+      --neon-green: #39ff14;
+      --neon-yellow: #ffe600;
+      --bg-dark: #0a0a12;
+      --bg-card: #0d0d1a;
+      --bg-card-alt: #111125;
+      --border: #1a1a35;
+      --text: #e0e0f0;
+      --text-dim: #7878a0;
+      --glow-cyan: 0 0 20px rgba(0,240,255,0.3), 0 0 60px rgba(0,240,255,0.1);
+      --glow-pink: 0 0 20px rgba(255,45,149,0.3), 0 0 60px rgba(255,45,149,0.1);
+      --glow-purple: 0 0 20px rgba(180,77,255,0.3), 0 0 60px rgba(180,77,255,0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ═══ SCANLINE OVERLAY ═══════════════════════════════════════════ */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,240,255,0.015) 2px,
+        rgba(0,240,255,0.015) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ═══ ANIMATED GRID BACKGROUND ══════════════════════════════════ */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 20s linear infinite;
+      z-index: -1;
+    }
+    @keyframes gridMove {
+      0% { transform: perspective(500px) rotateX(0deg); }
+      100% { transform: perspective(500px) rotateX(2deg); }
+    }
+
+    /* ═══ NAVIGATION ════════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(10,10,18,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,240,255,0.15);
+      padding: 0 40px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-shadow: var(--glow-cyan);
+      letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--neon-cyan);
+      box-shadow: var(--glow-cyan);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--neon-cyan); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ═══ HERO SECTION ══════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 40px 80px;
+    }
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--neon-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--neon-cyan);
+      animation: float var(--dur) var(--delay) infinite linear;
+      opacity: 0;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) translateX(var(--drift)); opacity: 0; }
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      color: var(--neon-pink);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-shadow: var(--glow-pink);
+      animation: fadeSlideUp 0.8s 0.2s both;
+    }
+    .hero-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeSlideUp 0.8s 0.4s both;
+    }
+    .hero-name .cyan { color: var(--neon-cyan); text-shadow: var(--glow-cyan); }
+    .hero-name .white { color: #fff; }
+    .hero-sub {
+      font-size: 20px;
+      color: var(--text-dim);
+      font-weight: 400;
+      max-width: 500px;
+      margin: 0 auto 36px;
+      animation: fadeSlideUp 0.8s 0.6s both;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      animation: fadeSlideUp 0.8s 0.8s both;
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══ BUTTONS ═══════════════════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 4px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid;
+    }
+    .btn-primary {
+      background: var(--neon-cyan);
+      color: var(--bg-dark);
+      border-color: var(--neon-cyan);
+      box-shadow: var(--glow-cyan);
+      font-weight: 700;
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--neon-cyan);
+      box-shadow: var(--glow-cyan), inset 0 0 30px rgba(0,240,255,0.1);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--neon-pink);
+      border-color: var(--neon-pink);
+    }
+    .btn-outline:hover {
+      box-shadow: var(--glow-pink), inset 0 0 30px rgba(255,45,149,0.1);
+    }
+
+    /* ═══ SECTION COMMON ═══════════════════════════════════════════ */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .section-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--neon-pink);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-shadow: var(--glow-pink);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 40px;
+    }
+    .section-title .accent { color: var(--neon-cyan); text-shadow: var(--glow-cyan); }
+
+    /* ═══ REVEAL ANIMATION ═════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══ ABOUT ════════════════════════════════════════════════════ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .about-text {
+      font-size: 17px;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+    .about-text strong { color: var(--neon-cyan); font-weight: 600; }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .stat-card:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: var(--glow-cyan);
+      transform: translateY(-4px);
+    }
+    .stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-shadow: var(--glow-cyan);
+    }
+    .stat-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 6px;
+    }
+
+    /* ═══ PROJECT CARDS ═════════════════════════════════════════════ */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .project-card:hover {
+      border-color: var(--neon-cyan);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,240,255,0.08);
+    }
+    .project-card:hover::before { opacity: 1; }
+    .project-card.featured {
+      grid-column: 1 / -1;
+      border-color: var(--neon-cyan);
+      background: linear-gradient(135deg, rgba(0,240,255,0.04), rgba(180,77,255,0.04));
+    }
+    .project-card.featured::before { opacity: 1; }
+    .project-tag {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: var(--neon-green);
+      border: 1px solid rgba(57,255,20,0.3);
+      padding: 3px 10px;
+      border-radius: 3px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .project-card.featured .project-tag {
+      color: var(--neon-cyan);
+      border-color: rgba(0,240,255,0.3);
+    }
+    .project-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .project-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      margin-bottom: 18px;
+      line-height: 1.7;
+    }
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .stack-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(0,240,255,0.08);
+      color: var(--neon-cyan);
+      border: 1px solid rgba(0,240,255,0.15);
+    }
+    .project-links {
+      display: flex;
+      gap: 12px;
+    }
+    .project-links a {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--neon-cyan);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+    }
+    .project-links a:hover {
+      text-shadow: var(--glow-cyan);
+    }
+
+    /* ═══ EDUCATION ═════════════════════════════════════════════════ */
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .edu-logo {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 12px rgba(0,240,255,0.3));
+    }
+    .edu-school {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .edu-degree {
+      font-size: 16px;
+      color: var(--neon-cyan);
+      margin-bottom: 2px;
+    }
+    .edu-minor { font-size: 15px; color: var(--text-dim); }
+    .edu-date {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--neon-pink);
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+
+    /* ═══ CERTIFICATIONS ═══════════════════════════════════════════ */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cert-card:hover {
+      border-color: var(--neon-purple);
+      transform: translateY(-4px);
+      box-shadow: var(--glow-purple);
+    }
+    .cert-img {
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+    .cert-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .cert-year {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--neon-purple);
+      margin-bottom: 14px;
+    }
+    .cert-link {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: var(--neon-cyan);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      padding: 6px 16px;
+      border: 1px solid rgba(0,240,255,0.3);
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    .cert-link:hover {
+      background: rgba(0,240,255,0.1);
+      box-shadow: var(--glow-cyan);
+    }
+
+    /* ═══ GAMING SECTION ═══════════════════════════════════════════ */
+    .gaming-section {
+      background: linear-gradient(180deg, transparent, rgba(180,77,255,0.03), transparent);
+    }
+    .gaming-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .game-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+    .game-card:hover {
+      transform: translateY(-6px);
+    }
+    .game-card.lol {
+      border-color: rgba(0,240,255,0.2);
+    }
+    .game-card.lol:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 40px rgba(0,240,255,0.1), 0 20px 60px rgba(0,240,255,0.05);
+    }
+    .game-card.val {
+      border-color: rgba(255,45,149,0.2);
+    }
+    .game-card.val:hover {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 40px rgba(255,45,149,0.1), 0 20px 60px rgba(255,45,149,0.05);
+    }
+    .game-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .game-card.lol .game-logo { color: var(--neon-cyan); text-shadow: var(--glow-cyan); }
+    .game-card.val .game-logo { color: var(--neon-pink); text-shadow: var(--glow-pink); }
+
+    .rank-display {
+      margin: 16px 0;
+    }
+    .rank-emblem {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 14px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rank-emblem img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 20px rgba(0,240,255,0.4));
+    }
+    .game-card.val .rank-emblem img {
+      filter: drop-shadow(0 0 20px rgba(255,45,149,0.4));
+    }
+    .rank-tier {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .rank-lp {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    .rank-wr {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--text-dim);
+      padding: 6px 16px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .wr-win { color: var(--neon-green); }
+    .wr-loss { color: var(--neon-pink); }
+    .game-ign {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+    .game-link {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      border: 1px solid;
+      transition: all 0.3s;
+    }
+    .game-card.lol .game-link {
+      color: var(--neon-cyan);
+      border-color: rgba(0,240,255,0.3);
+    }
+    .game-card.lol .game-link:hover {
+      background: rgba(0,240,255,0.1);
+      box-shadow: var(--glow-cyan);
+    }
+    .game-card.val .game-link {
+      color: var(--neon-pink);
+      border-color: rgba(255,45,149,0.3);
+    }
+    .game-card.val .game-link:hover {
+      background: rgba(255,45,149,0.1);
+      box-shadow: var(--glow-pink);
+    }
+    .rank-note {
+      font-size: 10px;
+      color: var(--text-dim);
+      opacity: 0.5;
+      margin-top: 12px;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    /* ═══ FOOTER ═══════════════════════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--neon-cyan); text-shadow: var(--glow-cyan); }
+    .footer-copy {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--text-dim);
+      opacity: 0.5;
+    }
+
+    /* ═══ GLITCH EFFECT ═══════════════════════════════════════════ */
+    .glitch {
+      position: relative;
+    }
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .glitch::before {
+      animation: glitch1 3s infinite linear;
+      clip-path: inset(0 0 80% 0);
+      color: var(--neon-pink);
+      text-shadow: -2px 0 var(--neon-pink);
+    }
+    .glitch::after {
+      animation: glitch2 3s infinite linear;
+      clip-path: inset(80% 0 0 0);
+      color: var(--neon-cyan);
+      text-shadow: 2px 0 var(--neon-cyan);
+    }
+    @keyframes glitch1 {
+      0%, 94% { transform: none; }
+      95% { transform: translate(-3px, -1px); }
+      96% { transform: translate(3px, 1px); }
+      97% { transform: none; }
+    }
+    @keyframes glitch2 {
+      0%, 96% { transform: none; }
+      97% { transform: translate(3px, 2px); }
+      98% { transform: translate(-3px, -2px); }
+      99% { transform: none; }
+    }
+
+    /* ═══ TYPING CURSOR ═══════════════════════════════════════════ */
+    .typing-cursor::after {
+      content: '|';
+      color: var(--neon-cyan);
+      animation: blink 1s step-end infinite;
+      margin-left: 2px;
+    }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* ═══ RESPONSIVE ═══════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid, .project-grid, .gaming-grid { grid-template-columns: 1fr; }
+      .cert-grid { grid-template-columns: 1fr 1fr; }
+      .project-card.featured { grid-column: auto; }
+      section { padding: 60px 20px; }
+      .hero { padding: 120px 20px 60px; }
+      .edu-card { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .cert-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
-<body class="bg-blue-50 text-gray-800 antialiased">
-  <!-- Navigation -->
-  <nav class="bg-blue-100 shadow">
-    <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-semibold">Hamza Al Ebousi</h1>
-      <div class="space-x-4">
-        <a href="#projects" class="hover:text-blue-700">Projects</a>
-        <a href="#education" class="hover:text-blue-700">Education</a>
-        <a href="#certs" class="hover:text-blue-700">Certifications</a>
-        <a href="#links" class="hover:text-blue-700">Gaming Profiles</a>
-        <a href="#contact" class="hover:text-blue-700">Contact</a>
+<body>
+  <div class="grid-bg"></div>
+
+  <!-- ═══ NAVIGATION ═══════════════════════════════════════════════ -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">HAMZA_</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#certs">Certs</a>
+        <a href="#gaming">Gaming</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <header class="bg-blue-100 py-16">
-    <div class="max-w-4xl mx-auto text-center px-4">
-      <h2 class="text-4xl font-bold mb-2">Aspiring Developer</h2>
-      <p class="text-gray-700 text-lg">Working on fun side projects</p>
-    </div>
-  </header>
-
-  <!-- About Me -->
-  <section id="about" class="bg-blue-50 py-12 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-semibold mb-4">About Me</h2>
-      <p class="text-gray-700 leading-relaxed">
-        I’m a computer science student at the University of Pittsburgh who loves bringing ideas to life with code.  
-        In my spare time you’ll find me lifting weights, playing ranked online videogames, or working on side projects.  
-        I’m always curious, always learning, and excited for what comes next.
-      </p>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="bg-blue-50 max-w-4xl mx-auto py-12 px-4">
-    <h2 class="text-2xl font-semibold mb-6">Key Projects</h2>
-    <div class="grid gap-6 md:grid-cols-2">
-      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
-        <h3 class="text-xl font-medium mb-2">YouTube Sentiment Analyzer</h3>
-        <p class="text-gray-600 mb-4">
-          Compares video transcript sentiment with user comments to gauge agreement.
-        </p>
-        <a href="https://github.com/Equinox2005/youtube-sentiment-analysis" target="_blank"
-           class="text-blue-600 hover:underline">View on GitHub →</a>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
-        <h3 class="text-xl font-medium mb-2">Sentiment-Driven Trading Signals</h3>
-        <p class="text-gray-600 mb-4">
-          Scrapes Reddit for stock mentions and generates sentiment score.
-        </p>
-        <a href="https://github.com/Equinox2005/sentiment_trader" target="_blank"
-           class="text-blue-600 hover:underline">View on GitHub →</a>
+  <!-- ═══ HERO ═════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-tag">// full-stack developer</div>
+      <h1 class="hero-name glitch" data-text="HAMZA AL EBOUSI">
+        <span class="cyan">HAMZA</span> <span class="white">AL EBOUSI</span>
+      </h1>
+      <p class="hero-sub">CS student at the University of Pittsburgh building ML platforms, cloud infrastructure, and full-stack applications.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="mailto:hamzalebousi@gmail.com" class="btn btn-outline">Contact Me</a>
       </div>
     </div>
   </section>
 
-  <!-- Education -->
-  <section id="education" class="bg-blue-50 max-w-4xl mx-auto py-12 px-4">
-    <h2 class="text-2xl font-semibold mb-6">Education</h2>
-    <div class="bg-white p-6 rounded-2xl shadow text-center">
-      <h3 class="text-xl font-medium mb-2">University of Pittsburgh</h3>
-      <p class="text-gray-600 mb-1">Bachelor of Science in Computer Science</p>
-      <p class="text-gray-600 mb-1">Minor in Mathematics</p>
-      <p class="text-gray-600 mb-4">Expected Graduation: 2026</p>
-      <img src="pitt_logo.svg" alt="University of Pittsburgh Logo"
-           class="w-16 mx-auto mb-4"/>
-    </div>
-  </section>
-
-<!-- Certifications -->
-<section id="certs" class="bg-blue-50 py-12 px-4">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-2xl font-semibold mb-6">Certifications</h2>
-    <div class="grid gap-6 md:grid-cols-2">
-      
-      <!-- Meta Certificate -->
-      <div class="bg-white p-6 rounded-2xl shadow text-center">
-        <h3 class="text-lg font-medium mb-2">Meta Front-End Developer Professional</h3>
-        <p class="text-gray-600 mb-2">Issued: 2024</p>
-        <a href="https://www.coursera.org/account/accomplishments/professional-cert/D3H7BRE3I379"
-           target="_blank"
-           class="inline-block mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Verify Certificate
-        </a>
-        <img src="metafrontend.png" alt="Meta Front-End Developer Certificate"
-             class="w-64 h-auto mx-auto mt-4 rounded-lg border"/>
+  <!-- ═══ ABOUT ════════════════════════════════════════════════════ -->
+  <section id="about" class="reveal">
+    <div class="section-label">// 01. About</div>
+    <h2 class="section-title">Who <span class="accent">I Am</span></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        I'm a computer science student at the <strong>University of Pittsburgh</strong> with a passion for turning ideas into real, deployable software. I specialize in <strong>machine learning</strong>, <strong>NLP</strong>, <strong>cloud computing</strong>, and <strong>full-stack development</strong>.
+        <br><br>
+        When I'm not coding, you'll find me lifting weights, grinding ranked in League of Legends or Valorant, or working on the next side project. Always curious, always building.
       </div>
-
-      <!-- ISC² Certificate -->
-      <div class="bg-white p-6 rounded-2xl shadow text-center">
-        <h3 class="text-lg font-medium mb-2">ISC² Certified in Cybersecurity (CC)</h3>
-        <p class="text-gray-600 mb-2">Issued: 2025</p>
-        <a href="https://www.credly.com/badges/53f11a00-35f6-481c-9d22-60482e6790cc/public_url"
-           target="_blank"
-           class="inline-block mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Verify Certificate
-        </a>
-        <img src="isc2cc.png"
-             alt="ISC² Certified in Cybersecurity Logo"
-             class="w-64 h-auto mx-auto mt-4 rounded-lg border"/>
-      </div>
-      <!-- AWS Cloud Practitioner Certificate -->
-      <div class="bg-white p-6 rounded-2xl shadow text-center">
-        <h3 class="text-lg font-medium mb-2">AWS Cloud Practitioner CLF-C02</h3>
-        <p class="text-gray-600 mb-2">Issued: 2025</p>
-        <a href="https://www.credly.com/badges/84661dcf-5979-4e8c-9116-e18e7612cf6d/public_url"
-           target="_blank"
-           class="inline-block mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Verify Certificate
-        </a>
-        <img src="aws.png"
-             alt="AWS Cloud Practitioner Logo"
-             class="w-64 h-auto mx-auto mt-4 rounded-lg border"/>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-  <!-- Gaming Profiles -->
-  <section id="links" class="bg-blue-50 py-12 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-semibold mb-6">Gaming Profiles</h2>
-      <div class="grid gap-6 md:grid-cols-2">
-        <div class="bg-white p-6 rounded-2xl shadow text-center">
-          <h3 class="text-lg font-medium mb-2">League of Legends (OP.GG)</h3>
-          <a href="https://op.gg/lol/summoners/na/Equinox-8496" target="_blank"
-             class="text-blue-600 hover:underline">Equinox#8496 on OP.GG</a>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-value">4</div>
+          <div class="stat-label">Certifications</div>
         </div>
-        <div class="bg-white p-6 rounded-2xl shadow text-center">
-          <h3 class="text-lg font-medium mb-2">Valorant (Tracker.gg)</h3>
-          <a href="https://tracker.gg/valorant/profile/riot/Equinox%238496/overview" target="_blank"
-             class="text-blue-600 hover:underline">Equinox#8496 on Tracker.gg</a>
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">81%</div>
+          <div class="stat-label">ML Model Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">2026</div>
+          <div class="stat-label">Graduation</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <footer id="contact" class="bg-blue-100 py-8 px-4">
-    <div class="max-w-4xl mx-auto text-center text-gray-600">
-      <p>Email: <a href="mailto:hamzalebousi@gmail.com" class="hover:text-blue-700">hamzalebousi@gmail.com</a></p>
-      <p class="mt-2">&copy; 2025 Hamza Al Ebousi</p>
+  <!-- ═══ PROJECTS ═════════════════════════════════════════════════ -->
+  <section id="projects" class="reveal">
+    <div class="section-label">// 02. Projects</div>
+    <h2 class="section-title">What I've <span class="accent">Built</span></h2>
+    <div class="project-grid">
+
+      <!-- Featured: Sentiment Platform -->
+      <div class="project-card featured">
+        <div class="project-tag">★ Featured — Live Demo</div>
+        <div class="project-title">ML Sentiment Analysis Platform</div>
+        <div class="project-desc">
+          Full-stack ML model serving platform. Trained a Logistic Regression classifier on 1.6M tweets (81.8% accuracy) with TF-IDF vectorization. Features a FastAPI backend with real-time prediction, batch inference, and text comparison endpoints. React dashboard with CSV bulk upload, interactive word cloud, side-by-side radar comparison, and export functionality. Fully containerized with Docker.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">scikit-learn</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Docker</span>
+          <span class="stack-tag">Recharts</span>
+          <span class="stack-tag">NLP</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Equinox2005/ml-sentiment-platform" target="_blank">[ GitHub → ]</a>
+          <a href="https://sentiment-dashboard.onrender.com" target="_blank">[ Live Demo → ]</a>
+        </div>
+      </div>
+
+      <!-- YouTube Sentiment -->
+      <div class="project-card">
+        <div class="project-tag">NLP / Data Pipeline</div>
+        <div class="project-title">YouTube Sentiment Analyzer</div>
+        <div class="project-desc">
+          End-to-end pipeline comparing video transcript sentiment with audience comment sentiment using Naive Bayes, TF-IDF, and YouTube Data API across 5,000+ comments per video.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">scikit-learn</span>
+          <span class="stack-tag">NLP</span>
+          <span class="stack-tag">YouTube API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Equinox2005/youtube-sentiment-analysis" target="_blank">[ GitHub → ]</a>
+        </div>
+      </div>
+
+      <!-- Sentiment Trader -->
+      <div class="project-card">
+        <div class="project-tag">ML / Finance</div>
+        <div class="project-title">Live Ticker Sentiment Trader</div>
+        <div class="project-desc">
+          Real-time sentiment-driven trading system streaming Reddit discussions and classifying market signals using VADER, Hugging Face Transformers, and PyTorch with a GUI dashboard.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">PyTorch</span>
+          <span class="stack-tag">Transformers</span>
+          <span class="stack-tag">Reddit API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Equinox2005/sentiment_trader" target="_blank">[ GitHub → ]</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ EDUCATION ═════════════════════════════════════════════════ -->
+  <section id="education" class="reveal">
+    <div class="section-label">// 03. Education</div>
+    <h2 class="section-title">Where I <span class="accent">Study</span></h2>
+    <div class="edu-card">
+      <img src="pitt_logo.svg" alt="University of Pittsburgh" class="edu-logo"/>
+      <div>
+        <div class="edu-school">University of Pittsburgh</div>
+        <div class="edu-degree">B.S. Computer Science</div>
+        <div class="edu-minor">Minor in Mathematics</div>
+        <div class="edu-date">Expected Graduation: April 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CERTIFICATIONS ═══════════════════════════════════════════ -->
+  <section id="certs" class="reveal">
+    <div class="section-label">// 04. Certifications</div>
+    <h2 class="section-title">Verified <span class="accent">Skills</span></h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <img src="metafrontend.png" alt="Meta Front-End Developer" class="cert-img"/>
+        <div class="cert-name">Meta Front-End Developer</div>
+        <div class="cert-year">2024</div>
+        <a href="https://www.coursera.org/account/accomplishments/professional-cert/D3H7BRE3I379" target="_blank" class="cert-link">Verify →</a>
+      </div>
+      <div class="cert-card">
+        <img src="isc2cc.png" alt="ISC2 CC" class="cert-img"/>
+        <div class="cert-name">ISC² Certified in Cybersecurity</div>
+        <div class="cert-year">2025</div>
+        <a href="https://www.credly.com/badges/53f11a00-35f6-481c-9d22-60482e6790cc/public_url" target="_blank" class="cert-link">Verify →</a>
+      </div>
+      <div class="cert-card">
+        <img src="aws.png" alt="AWS Cloud Practitioner" class="cert-img"/>
+        <div class="cert-name">AWS Cloud Practitioner CLF-C02</div>
+        <div class="cert-year">2025</div>
+        <a href="https://www.credly.com/badges/84661dcf-5979-4e8c-9116-e18e7612cf6d/public_url" target="_blank" class="cert-link">Verify →</a>
+      </div>
+      <div class="cert-card">
+        <img src="aws-saa.png" alt="AWS Solutions Architect Associate" class="cert-img"/>
+        <div class="cert-name">AWS Solutions Architect Associate</div>
+        <div class="cert-year">2025</div>
+        <a href="https://www.credly.com/badges/752d0b3d-7a08-444c-ab1b-6d8e94d5790d/public_url" target="_blank" class="cert-link">Verify →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GAMING ═══════════════════════════════════════════════════ -->
+  <section id="gaming" class="gaming-section reveal">
+    <div class="section-label">// 05. Gaming Profiles</div>
+    <h2 class="section-title">Off the <span class="accent">Clock</span></h2>
+    <div class="gaming-grid">
+
+      <!-- League of Legends -->
+      <div class="game-card lol">
+        <div class="game-logo">League of Legends</div>
+        <div class="rank-display">
+          <div class="rank-emblem">
+            <img src="plat.png" alt="Rank Emblem"/>
+          </div>
+          <div class="rank-tier" id="lol-rank">Platinum III</div>
+          <div class="rank-lp" id="lol-lp"></div>
+        </div>
+        <div class="game-ign">Equinox#8496 • NA</div>
+        <a href="https://op.gg/lol/summoners/na/Equinox-8496" target="_blank" class="game-link">View on OP.GG →</a>
+        <div class="rank-note">Update: manually edit rank in index.html or connect Riot API</div>
+      </div>
+
+      <!-- Valorant -->
+      <div class="game-card val">
+        <div class="game-logo">Valorant</div>
+        <div class="rank-display">
+          <div class="rank-emblem">
+            <img src="https://trackercdn.com/cdn/tracker.gg/valorant/icons/tiersv2/23.png" alt="Rank Emblem"/>
+          </div>
+          <div class="rank-tier" id="val-rank">Ascendant 3</div>
+          <div class="rank-lp" id="val-rr"></div>
+
+        </div>
+        <div class="game-ign">Equinox#8496</div>
+        <a href="https://tracker.gg/valorant/profile/riot/Equinox%238496/overview" target="_blank" class="game-link">View on Tracker.gg →</a>
+        <div class="rank-note">Update: manually edit rank in index.html or connect Riot API</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT / FOOTER ═════════════════════════════════════════ -->
+  <footer id="contact">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="mailto:hamzalebousi@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/hamza-al-eb2005/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Equinox2005" target="_blank">GitHub</a>
+        <a href="https://equinox2005.github.io/resume-website/" target="_blank">Portfolio</a>
+      </div>
+      <div class="footer-copy">© 2025 Hamza Al Ebousi</div>
     </div>
   </footer>
+
+  <!-- ═══ SCRIPTS ══════════════════════════════════════════════════ -->
+  <script>
+    /* ── Particle Generator ──────────────────────────────────────── */
+    (function() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 40; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.setProperty('--dur', (6 + Math.random() * 10) + 's');
+        p.style.setProperty('--delay', (Math.random() * 8) + 's');
+        p.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
+        if (Math.random() > 0.7) {
+          p.style.background = 'var(--neon-pink)';
+          p.style.boxShadow = '0 0 6px var(--neon-pink)';
+        }
+        container.appendChild(p);
+      }
+    })();
+
+    /* ── Scroll Reveal ───────────────────────────────────────────── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Nav Active State ────────────────────────────────────────── */
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + 100;
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+        if (link) {
+          if (scrollY >= top && scrollY < top + height) {
+            link.style.color = 'var(--neon-cyan)';
+          } else {
+            link.style.color = '';
+          }
+        }
+      });
+    });
+
+    /* ── Smooth Nav Shrink ────────────────────────────────────────── */
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.style.borderBottomColor = 'rgba(0,240,255,0.25)';
+        nav.style.background = 'rgba(10,10,18,0.95)';
+      } else {
+        nav.style.borderBottomColor = 'rgba(0,240,255,0.15)';
+        nav.style.background = 'rgba(10,10,18,0.85)';
+      }
+    });
+  </script>
 </body>
 </html>
