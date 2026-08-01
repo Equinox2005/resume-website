@@ -223,26 +223,27 @@
     }
     .btn-ghost:hover { border-color: var(--border-strong); transform: translateY(-2px); }
 
-    /* Hero terminal card */
-    .term {
+    /* Hero snapshot card */
+    .snap {
       background: var(--card-solid); border: 1px solid var(--border);
       border-radius: var(--radius); box-shadow: var(--shadow), var(--glow);
-      overflow: hidden; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+      padding: 30px 32px;
     }
-    .term-bar {
-      display: flex; align-items: center; gap: 7px; padding: 13px 16px;
-      border-bottom: 1px solid var(--border); background: var(--bg-soft);
+    .snap-title {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 20px;
     }
-    .term-bar span { width: 11px; height: 11px; border-radius: 50%; }
-    .term-bar .r { background: #ff5f57; } .term-bar .y { background: #febc2e; } .term-bar .g { background: #28c840; }
-    .term-bar .title { margin-left: auto; margin-right: auto; color: var(--text-3); font-size: 12px; }
-    .term-body { padding: 20px 22px; line-height: 2.05; }
-    .term-body .p { color: var(--accent-2); }
-    .term-body .k { color: var(--text-3); }
-    .term-body .v { color: var(--text); }
-    .term-body .s { color: #34d399; }
-    .term-body a { color: var(--accent-2); text-decoration: none; }
-    .term-body a:hover { text-decoration: underline; }
+    .snap-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 13px 0; border-bottom: 1px solid var(--border);
+      font-size: 14.5px; color: var(--text-2);
+    }
+    .snap-row:last-child { border-bottom: none; }
+    .snap-row strong { color: var(--text); font-weight: 600; }
+    .snap-row .emoji { font-size: 18px; width: 26px; text-align: center; flex-shrink: 0; }
+    .snap-row a { color: var(--accent-2); text-decoration: none; font-weight: 600; }
+    .snap-row a:hover { text-decoration: underline; }
 
     /* ─── Stats strip ───────────────────────────────────────── */
     .stats { padding-top: 0; padding-bottom: 0; }
@@ -503,7 +504,7 @@
   <!-- ─── Nav ─────────────────────────────────────────────── -->
   <nav>
     <div class="nav-inner">
-      <a href="#" class="nav-logo"><span class="dot"></span>hamza.dev</a>
+      <a href="#" class="nav-logo"><span class="dot"></span>Hamza</a>
       <div class="nav-links">
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
@@ -552,22 +553,13 @@
           </button>
         </div>
       </div>
-      <div class="term reveal">
-        <div class="term-bar">
-          <span class="r"></span><span class="y"></span><span class="g"></span>
-          <span class="title">hamza@pitt — ~/about</span>
-        </div>
-        <div class="term-body">
-          <div><span class="p">➜</span> <span class="k">whoami</span></div>
-          <div><span class="v">Hamza Al Ebousi</span></div>
-          <div><span class="p">➜</span> <span class="k">cat status.json</span></div>
-          <div><span class="k">{</span></div>
-          <div>&nbsp;&nbsp;<span class="k">"role":</span> <span class="s">"Software Engineer @ PNC"</span><span class="k">,</span></div>
-          <div>&nbsp;&nbsp;<span class="k">"degree":</span> <span class="s">"B.S. CS, Pitt '26 ✓"</span><span class="k">,</span></div>
-          <div>&nbsp;&nbsp;<span class="k">"github":</span> <a href="https://github.com/Equinox2005" target="_blank" rel="noopener">"github.com/Equinox2005"</a><span class="k">,</span></div>
-          <div>&nbsp;&nbsp;<span class="k">"location":</span> <span class="s">"Pittsburgh, PA"</span></div>
-          <div><span class="k">}</span></div>
-        </div>
+      <div class="snap reveal">
+        <div class="snap-title">Right now</div>
+        <div class="snap-row"><span class="emoji">💼</span><span>Engineering software at <strong>PNC</strong></span></div>
+        <div class="snap-row"><span class="emoji">🎓</span><span>Pitt CS grad, class of <strong>2026</strong></span></div>
+        <div class="snap-row"><span class="emoji">📍</span><span>Based in <strong>Pittsburgh, PA</strong></span></div>
+        <div class="snap-row"><span class="emoji">🛠️</span><span>Building side projects on <a href="https://github.com/Equinox2005" target="_blank" rel="noopener">GitHub</a></span></div>
+        <div class="snap-row"><span class="emoji">🎮</span><span>Probably in a ranked queue after hours</span></div>
       </div>
     </div>
   </section>
@@ -792,8 +784,8 @@
   <!-- ─── Contact ─────────────────────────────────────────── -->
   <section id="contact" class="reveal">
     <div class="contact-card">
-      <h2>Let's build something.</h2>
-      <p>Open to interesting projects, collaboration, and conversations about ML, cloud, or software engineering.</p>
+      <h2>Get in touch</h2>
+      <p>Always happy to talk projects, ML, cloud, or anything software.</p>
       <div class="contact-actions">
         <a href="mailto:hamzalebousi@gmail.com" class="btn btn-primary">
           <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm8 7L4.5 6.2a.5.5 0 0 0-.5.44V18h16V6.64a.5.5 0 0 0-.5-.44L12 11Z"/></svg>
