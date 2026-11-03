@@ -1,973 +1,209 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hamza Al Ebousi — Software Engineer</title>
-  <meta name="description" content="Hamza Al Ebousi — Software Engineer at PNC. University of Pittsburgh CS graduate building ML platforms, browser extensions, and full-stack applications."/>
-  <meta property="og:title" content="Hamza Al Ebousi — Software Engineer"/>
-  <meta property="og:description" content="Software Engineer at PNC · Pitt CS graduate · ML, full-stack, and cloud."/>
-  <meta property="og:type" content="website"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    /* ─── Base ──────────────────────────────────────────────── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hamza Al Ebousi</title>
+<meta name="description" content="Software engineer at PNC in Pittsburgh. Pitt computer science, class of 2026. Browser extensions and machine learning projects.">
+<meta property="og:title" content="Hamza Al Ebousi">
+<meta property="og:description" content="Software engineer at PNC in Pittsburgh. Pitt computer science, class of 2026.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://equinox2005.github.io/resume-website/">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003594'/%3E%3Ctext x='16' y='22.5' font-family='Segoe UI,system-ui,sans-serif' font-size='18' font-weight='600' fill='white' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --text: #1d1d1b;
+    --muted: #5c5c57;
+    --faint: #85857f;
+    --rule: #e5e4e0;
+    --link: #003594;
+  }
+  @media (prefers-color-scheme: dark) {
     :root {
-      --accent: #6366f1;
-      --accent-2: #22d3ee;
-      --gradient: linear-gradient(135deg, #6366f1 0%, #22d3ee 100%);
-      --radius: 16px;
-      --nav-h: 68px;
-      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --bg: #141413;
+      --text: #e8e7e3;
+      --muted: #a9a8a2;
+      --faint: #7f7e79;
+      --rule: #2a2a28;
+      --link: #9db7ff;
     }
-    [data-theme="dark"] {
-      --bg: #0a0e17;
-      --bg-soft: #0e1420;
-      --card: rgba(255,255,255,0.03);
-      --card-solid: #101726;
-      --border: rgba(255,255,255,0.08);
-      --border-strong: rgba(255,255,255,0.14);
-      --text: #e7ecf5;
-      --text-2: #9aa7bd;
-      --text-3: #66738c;
-      --nav-bg: rgba(10,14,23,0.78);
-      --shadow: 0 24px 60px -20px rgba(0,0,0,0.6);
-      --glow: 0 0 80px rgba(99,102,241,0.15);
-      --chip-bg: rgba(99,102,241,0.1);
-    }
-    [data-theme="light"] {
-      --bg: #f6f8fc;
-      --bg-soft: #eef2f9;
-      --card: #ffffff;
-      --card-solid: #ffffff;
-      --border: rgba(15,23,42,0.09);
-      --border-strong: rgba(15,23,42,0.16);
-      --text: #0f172a;
-      --text-2: #475569;
-      --text-3: #7c8aa3;
-      --nav-bg: rgba(246,248,252,0.82);
-      --shadow: 0 24px 60px -28px rgba(15,23,42,0.22);
-      --glow: none;
-      --chip-bg: rgba(99,102,241,0.08);
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-      transition: background 0.4s, color 0.4s;
-    }
-    ::selection { background: rgba(99,102,241,0.35); }
-    h1, h2, h3 { font-family: 'Sora', sans-serif; letter-spacing: -0.02em; }
-    .mono { font-family: 'JetBrains Mono', monospace; }
-    a { color: inherit; }
+  }
 
-    /* Ambient background */
-    .ambient {
-      position: fixed; inset: 0; z-index: -2; overflow: hidden;
-      pointer-events: none;
-    }
-    .ambient::before, .ambient::after {
-      content: ''; position: absolute; border-radius: 50%;
-      filter: blur(110px); opacity: 0.5;
-    }
-    .ambient::before {
-      width: 640px; height: 640px; top: -240px; right: -160px;
-      background: radial-gradient(circle, rgba(99,102,241,0.22), transparent 65%);
-    }
-    .ambient::after {
-      width: 560px; height: 560px; bottom: -220px; left: -180px;
-      background: radial-gradient(circle, rgba(34,211,238,0.14), transparent 65%);
-    }
-    [data-theme="light"] .ambient::before { opacity: 0.35; }
-    [data-theme="light"] .ambient::after { opacity: 0.3; }
-    .dots {
-      position: fixed; inset: 0; z-index: -1; pointer-events: none;
-      background-image: radial-gradient(var(--border) 1px, transparent 1px);
-      background-size: 34px 34px;
-      mask-image: radial-gradient(ellipse 90% 65% at 50% 0%, black 40%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 90% 65% at 50% 0%, black 40%, transparent 100%);
-    }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 42rem; margin: 0 auto; padding: 4.5rem 1.25rem 3rem; }
 
-    /* Scroll progress */
-    #progress {
-      position: fixed; top: 0; left: 0; height: 2.5px; width: 0%;
-      background: var(--gradient); z-index: 1000;
-      box-shadow: 0 0 12px rgba(99,102,241,0.6);
-    }
+  a {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in srgb, var(--link) 35%, transparent);
+  }
+  a:hover { text-decoration-color: currentColor; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
 
-    /* ─── Nav ───────────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      background: var(--nav-bg);
-      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.4s;
-    }
-    .nav-inner {
-      max-width: 1120px; margin: 0 auto; height: var(--nav-h);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 28px;
-    }
-    .nav-logo {
-      font-family: 'Sora', sans-serif; font-weight: 800; font-size: 17px;
-      text-decoration: none; display: flex; align-items: center; gap: 10px;
-    }
-    .nav-logo .dot {
-      width: 10px; height: 10px; border-radius: 3px;
-      background: var(--gradient); display: inline-block;
-      box-shadow: 0 0 14px rgba(99,102,241,0.7);
-    }
-    .nav-links { display: flex; align-items: center; gap: 4px; }
-    .nav-links a {
-      text-decoration: none; color: var(--text-2); font-size: 13.5px;
-      font-weight: 500; padding: 7px 13px; border-radius: 8px;
-      transition: all 0.25s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--card); }
-    .nav-actions { display: flex; align-items: center; gap: 10px; }
-    .icon-btn {
-      width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border);
-      background: var(--card); color: var(--text-2); cursor: pointer;
-      display: inline-flex; align-items: center; justify-content: center;
-      transition: all 0.25s; text-decoration: none;
-    }
-    .icon-btn:hover { color: var(--text); border-color: var(--border-strong); transform: translateY(-1px); }
-    .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
-    .kbd-hint {
-      display: inline-flex; align-items: center; gap: 6px;
-      border: 1px solid var(--border); background: var(--card);
-      border-radius: 10px; padding: 8px 12px; cursor: pointer;
-      color: var(--text-3); font-size: 12px; font-family: 'JetBrains Mono', monospace;
-      transition: all 0.25s;
-    }
-    .kbd-hint:hover { color: var(--text-2); border-color: var(--border-strong); }
-    .kbd-hint kbd {
-      background: var(--bg-soft); border: 1px solid var(--border);
-      border-radius: 5px; padding: 1px 6px; font-size: 11px; font-family: inherit;
-    }
+  h1 { font-size: 1.75rem; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+  h2 {
+    font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 1rem;
+  }
+  h3 { font-size: 1rem; font-weight: 600; margin: 0; }
 
-    /* ─── Layout ────────────────────────────────────────────── */
-    section { max-width: 1120px; margin: 0 auto; padding: 96px 28px; }
-    .section-head { margin-bottom: 48px; }
-    .eyebrow {
-      font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
-      letter-spacing: 2.5px; text-transform: uppercase;
-      background: var(--gradient); -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent; font-weight: 600;
-      display: inline-block; margin-bottom: 12px;
-    }
-    .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 700; }
-    .section-sub { color: var(--text-2); margin-top: 10px; max-width: 560px; }
+  .lede { color: var(--muted); margin: 0.25rem 0 0; }
+  .contact { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; list-style: none; margin: 1rem 0 0; padding: 0; }
+  .intro { margin-top: 2.5rem; }
+  .intro p { margin: 0 0 1rem; }
 
-    /* Reveal */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
-    .reveal.visible { opacity: 1; transform: none; }
+  section { margin-top: 3.25rem; }
+  .entry { padding: 1.5rem 0; border-top: 1px solid var(--rule); }
+  .entry:first-of-type { border-top: 0; padding-top: 0; }
+  .entry:last-child { padding-bottom: 0; }
+  .row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.25rem 1rem; }
+  .when { color: var(--faint); font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+  .links { display: flex; gap: 1rem; font-size: 0.9375rem; }
+  .entry p { margin: 0.5rem 0 0; }
+  .entry ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+  .entry li { margin: 0.25rem 0; }
+  .stack { color: var(--muted); font-size: 0.875rem; }
+  .note { color: var(--faint); font-size: 0.875rem; }
+  .shot { display: block; width: 100%; height: auto; margin-top: 1rem; border: 1px solid var(--rule); border-radius: 6px; }
 
-    /* ─── Hero ──────────────────────────────────────────────── */
-    .hero {
-      min-height: 92vh; display: flex; align-items: center;
-      padding-top: calc(var(--nav-h) + 40px);
-    }
-    .hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center; width: 100%; }
-    .badge-live {
-      display: inline-flex; align-items: center; gap: 9px;
-      border: 1px solid var(--border); background: var(--card);
-      border-radius: 999px; padding: 7px 16px; font-size: 13px;
-      color: var(--text-2); font-weight: 500; margin-bottom: 26px;
-    }
-    .pulse {
-      width: 8px; height: 8px; border-radius: 50%; background: #34d399; position: relative;
-    }
-    .pulse::after {
-      content: ''; position: absolute; inset: -4px; border-radius: 50%;
-      border: 2px solid #34d399; animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0% { transform: scale(0.6); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
-    .hero h1 {
-      font-size: clamp(42px, 6.5vw, 68px); font-weight: 800; line-height: 1.06;
-      margin-bottom: 22px;
-    }
-    .hero h1 .grad {
-      background: var(--gradient);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero-role {
-      font-family: 'JetBrains Mono', monospace; font-size: 16px; color: var(--text-2);
-      margin-bottom: 20px; min-height: 26px;
-    }
-    .hero-role .caret { display: inline-block; width: 9px; background: var(--accent-2); margin-left: 3px; animation: blink 1s step-end infinite; color: transparent; }
-    @keyframes blink { 50% { opacity: 0; } }
-    .hero-desc { color: var(--text-2); font-size: 17px; max-width: 540px; margin-bottom: 36px; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 9px;
-      padding: 13px 26px; border-radius: 12px; font-weight: 600; font-size: 14.5px;
-      text-decoration: none; cursor: pointer; border: none;
-      font-family: 'Inter', sans-serif; transition: all 0.3s var(--ease);
-    }
-    .btn svg { width: 17px; height: 17px; fill: currentColor; }
-    .btn-primary {
-      background: var(--gradient); color: #fff;
-      box-shadow: 0 10px 30px -8px rgba(99,102,241,0.55);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 38px -8px rgba(99,102,241,0.65); }
-    .btn-ghost {
-      background: var(--card); color: var(--text); border: 1px solid var(--border);
-    }
-    .btn-ghost:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .plain { list-style: none; margin: 0; padding: 0; }
+  .plain li {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 1rem;
+    padding: 0.6rem 0; border-top: 1px solid var(--rule);
+  }
+  .plain li:first-child { border-top: 0; padding-top: 0; }
 
-    /* Hero snapshot card */
-    .snap {
-      background: var(--card-solid); border: 1px solid var(--border);
-      border-radius: var(--radius); box-shadow: var(--shadow), var(--glow);
-      padding: 30px 32px;
-    }
-    .snap-title {
-      font-family: 'JetBrains Mono', monospace; font-size: 12px;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--text-3);
-      margin-bottom: 20px;
-    }
-    .snap-row {
-      display: flex; align-items: center; gap: 14px;
-      padding: 13px 0; border-bottom: 1px solid var(--border);
-      font-size: 14.5px; color: var(--text-2);
-    }
-    .snap-row:last-child { border-bottom: none; }
-    .snap-row strong { color: var(--text); font-weight: 600; }
-    .snap-row .emoji { font-size: 18px; width: 26px; text-align: center; flex-shrink: 0; }
-    .snap-row a { color: var(--accent-2); text-decoration: none; font-weight: 600; }
-    .snap-row a:hover { text-decoration: underline; }
+  footer { margin-top: 4rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); color: var(--faint); font-size: 0.875rem; }
 
-    /* ─── Stats strip ───────────────────────────────────────── */
-    .stats { padding-top: 0; padding-bottom: 0; }
-    .stats-inner {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--border); border-radius: var(--radius);
-      background: var(--card); overflow: hidden;
-    }
-    .stat {
-      padding: 28px 20px; text-align: center;
-      border-right: 1px solid var(--border);
-    }
-    .stat:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Sora', sans-serif; font-size: 34px; font-weight: 800;
-      background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .stat-label { color: var(--text-3); font-size: 12.5px; margin-top: 4px; text-transform: uppercase; letter-spacing: 1.2px; font-family: 'JetBrains Mono', monospace; }
-
-    /* ─── Experience timeline ───────────────────────────────── */
-    .timeline { position: relative; margin-left: 8px; }
-    .timeline::before {
-      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px;
-      background: linear-gradient(180deg, var(--accent), var(--accent-2), transparent);
-      border-radius: 2px;
-    }
-    .t-item { position: relative; padding: 0 0 44px 40px; }
-    .t-item:last-child { padding-bottom: 0; }
-    .t-item::before {
-      content: ''; position: absolute; left: -6px; top: 6px;
-      width: 14px; height: 14px; border-radius: 50%;
-      background: var(--bg); border: 3px solid var(--accent);
-      box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
-    }
-    .t-card {
-      background: var(--card-solid); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 28px 30px;
-      transition: border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s;
-      position: relative; overflow: hidden;
-    }
-    .t-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow); }
-    .t-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
-    .t-role { font-family: 'Sora', sans-serif; font-size: 19px; font-weight: 700; }
-    .t-org { color: var(--text-2); font-weight: 500; margin-bottom: 14px; font-size: 14.5px; }
-    .t-org strong { color: var(--text); }
-    .t-date {
-      font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-3);
-      border: 1px solid var(--border); border-radius: 999px; padding: 5px 13px;
-      white-space: nowrap; background: var(--card);
-    }
-    .t-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-size: 11.5px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--chip-bg); color: var(--accent);
-      border: 1px solid rgba(99,102,241,0.25);
-      border-radius: 999px; padding: 4px 12px; margin-bottom: 14px;
-    }
-    [data-theme="dark"] .t-badge { color: #a5b4fc; }
-    .t-desc { color: var(--text-2); font-size: 14.5px; }
-    .t-desc li { margin: 8px 0 8px 18px; }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .chip {
-      font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
-      color: var(--text-2); background: var(--card);
-      border: 1px solid var(--border); border-radius: 7px; padding: 4px 10px;
-      transition: all 0.25s;
-    }
-    .chip:hover { border-color: var(--accent); color: var(--text); }
-
-    /* ─── Projects ──────────────────────────────────────────── */
-    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-    .proj {
-      position: relative; background: var(--card-solid);
-      border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 30px; overflow: hidden; display: flex; flex-direction: column;
-      transition: transform 0.35s var(--ease), border-color 0.3s, box-shadow 0.35s;
-    }
-    .proj:hover { transform: translateY(-5px); border-color: var(--border-strong); box-shadow: var(--shadow); }
-    .proj.wide { grid-column: span 2; }
-    /* cursor spotlight */
-    .proj::before {
-      content: ''; position: absolute; inset: 0; opacity: 0;
-      background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 50%), rgba(99,102,241,0.09), transparent 65%);
-      transition: opacity 0.4s; pointer-events: none;
-    }
-    .proj:hover::before { opacity: 1; }
-    .proj-tag {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
-      letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent-2);
-      margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
-    }
-    .proj-tag .star { color: #fbbf24; }
-    .proj-title { font-family: 'Sora', sans-serif; font-size: 21px; font-weight: 700; margin-bottom: 12px; }
-    .proj-desc { color: var(--text-2); font-size: 14.5px; flex: 1; }
-    .proj-links { display: flex; gap: 18px; margin-top: 20px; }
-    .proj-links a {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-size: 13.5px; font-weight: 600; text-decoration: none;
-      color: var(--text-2); transition: color 0.25s;
-    }
-    .proj-links a:hover { color: var(--accent-2); }
-    .proj-links svg { width: 15px; height: 15px; fill: currentColor; }
-    .proj-note { font-size: 12px; color: var(--text-3); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
-
-    /* ─── Education / Certs ─────────────────────────────────── */
-    .edu-card {
-      display: flex; align-items: center; gap: 34px;
-      background: var(--card-solid); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 38px 42px;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    .edu-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow); }
-    .edu-logo { width: 92px; height: 92px; object-fit: contain; flex-shrink: 0; }
-    .edu-school { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 700; }
-    .edu-degree { color: var(--text-2); margin-top: 4px; font-size: 15px; }
-    .grad-badge {
-      display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
-      background: rgba(52,211,153,0.1); color: #34d399;
-      border: 1px solid rgba(52,211,153,0.3); border-radius: 999px;
-      padding: 6px 16px; font-size: 13px; font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .grad-badge svg { width: 15px; height: 15px; fill: currentColor; }
-
-    .cert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .cert {
-      background: var(--card-solid); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 26px 20px; text-align: center;
-      display: flex; flex-direction: column; align-items: center;
-      transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s;
-    }
-    .cert:hover { transform: translateY(-4px); border-color: var(--border-strong); box-shadow: var(--shadow); }
-    .cert img { width: 84px; height: 84px; object-fit: contain; margin-bottom: 16px; }
-    .cert-name { font-weight: 600; font-size: 14px; line-height: 1.4; }
-    .cert-year { color: var(--text-3); font-size: 12px; margin: 6px 0 12px; font-family: 'JetBrains Mono', monospace; }
-    .cert a { font-size: 13px; font-weight: 600; color: var(--accent-2); text-decoration: none; margin-top: auto; }
-    .cert a:hover { text-decoration: underline; }
-
-    /* ─── Gaming ────────────────────────────────────────────── */
-    .game-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-    .game {
-      background: var(--card-solid); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 32px; text-align: center;
-      transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s;
-    }
-    .game:hover { transform: translateY(-4px); border-color: var(--border-strong); box-shadow: var(--shadow); }
-    .game-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 20px; }
-    .game img.emblem { width: 104px; height: 104px; object-fit: contain; filter: drop-shadow(0 8px 22px rgba(99,102,241,0.35)); }
-    .game-rank { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; margin-top: 12px; }
-    .game-ign { color: var(--text-3); font-size: 13px; font-family: 'JetBrains Mono', monospace; margin: 6px 0 18px; }
-    .game a.link {
-      display: inline-block; font-size: 13px; font-weight: 600; text-decoration: none;
-      color: var(--text-2); border: 1px solid var(--border); border-radius: 10px;
-      padding: 9px 20px; transition: all 0.25s;
-    }
-    .game a.link:hover { color: var(--text); border-color: var(--accent); }
-
-    /* ─── Contact / Footer ──────────────────────────────────── */
-    .contact-card {
-      text-align: center; background: var(--card-solid);
-      border: 1px solid var(--border); border-radius: 24px;
-      padding: 72px 40px; position: relative; overflow: hidden;
-    }
-    .contact-card::before {
-      content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
-      width: 500px; height: 240px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(99,102,241,0.18), transparent 70%);
-      filter: blur(40px); pointer-events: none;
-    }
-    .contact-card h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 14px; position: relative; }
-    .contact-card p { color: var(--text-2); max-width: 480px; margin: 0 auto 34px; position: relative; }
-    .contact-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; position: relative; }
-    footer {
-      border-top: 1px solid var(--border); padding: 34px 28px;
-      display: flex; justify-content: space-between; align-items: center;
-      max-width: 1120px; margin: 0 auto; flex-wrap: wrap; gap: 16px;
-    }
-    footer .copy { color: var(--text-3); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
-    footer .socials { display: flex; gap: 10px; }
-
-    /* ─── Command palette ───────────────────────────────────── */
-    .palette-overlay {
-      position: fixed; inset: 0; background: rgba(4,6,12,0.6);
-      backdrop-filter: blur(6px); z-index: 500;
-      display: none; align-items: flex-start; justify-content: center;
-      padding-top: 16vh;
-    }
-    .palette-overlay.open { display: flex; }
-    .palette {
-      width: min(560px, 92vw); background: var(--card-solid);
-      border: 1px solid var(--border-strong); border-radius: 16px;
-      box-shadow: var(--shadow); overflow: hidden;
-      animation: palIn 0.22s var(--ease);
-    }
-    @keyframes palIn { from { opacity: 0; transform: translateY(-14px) scale(0.98); } }
-    .palette input {
-      width: 100%; background: transparent; border: none; outline: none;
-      padding: 18px 22px; font-size: 15.5px; color: var(--text);
-      font-family: 'Inter', sans-serif; border-bottom: 1px solid var(--border);
-    }
-    .palette-list { max-height: 320px; overflow-y: auto; padding: 8px; }
-    .palette-item {
-      display: flex; align-items: center; gap: 13px;
-      padding: 12px 14px; border-radius: 10px; cursor: pointer;
-      color: var(--text-2); font-size: 14.5px;
-    }
-    .palette-item .pi-icon { font-size: 15px; width: 22px; text-align: center; }
-    .palette-item:hover, .palette-item.sel { background: var(--chip-bg); color: var(--text); }
-    .palette-item .hint { margin-left: auto; font-size: 11.5px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
-
-    /* Back to top */
-    #toTop {
-      position: fixed; right: 26px; bottom: 26px; z-index: 90;
-      opacity: 0; pointer-events: none; transform: translateY(10px);
-      transition: all 0.3s;
-    }
-    #toTop.show { opacity: 1; pointer-events: auto; transform: none; }
-
-    /* Toast */
-    #toast {
-      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px);
-      background: var(--card-solid); border: 1px solid var(--border-strong);
-      color: var(--text); padding: 12px 24px; border-radius: 12px;
-      font-size: 14px; font-weight: 500; box-shadow: var(--shadow);
-      transition: transform 0.35s var(--ease); z-index: 600;
-    }
-    #toast.show { transform: translateX(-50%) translateY(0); }
-
-    /* ─── Responsive ────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 44px; }
-      .stats-inner { grid-template-columns: 1fr 1fr; }
-      .stat:nth-child(2) { border-right: none; }
-      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
-      .proj-grid, .game-grid { grid-template-columns: 1fr; }
-      .proj.wide { grid-column: auto; }
-      .cert-grid { grid-template-columns: 1fr 1fr; }
-      .nav-links { display: none; }
-    }
-    @media (max-width: 520px) {
-      section { padding: 68px 20px; }
-      .cert-grid { grid-template-columns: 1fr; }
-      .edu-card { flex-direction: column; text-align: center; padding: 32px 24px; }
-      .kbd-hint { display: none; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      html { scroll-behavior: auto; }
-    }
-  </style>
+  @media print {
+    :root { --bg: #fff; --text: #000; --muted: #333; --faint: #555; --rule: #ccc; --link: #000; }
+    main { max-width: none; padding: 0; }
+    a { text-decoration: none; }
+    .shot, .note { display: none; }
+  }
+</style>
 </head>
 <body>
-  <div class="ambient"></div>
-  <div class="dots"></div>
-  <div id="progress"></div>
+<main>
+  <header>
+    <h1>Hamza Al Ebousi</h1>
+    <p class="lede">Software engineer at PNC, Pittsburgh</p>
+    <ul class="contact">
+      <li><a href="mailto:hamzalebousi@gmail.com">hamzalebousi@gmail.com</a></li>
+      <li><a href="https://github.com/Equinox2005">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/hamza-al-eb2005/">LinkedIn</a></li>
+    </ul>
+  </header>
 
-  <!-- ─── Nav ─────────────────────────────────────────────── -->
-  <nav>
-    <div class="nav-inner">
-      <a href="#" class="nav-logo"><span class="dot"></span>Hamza</a>
-      <div class="nav-links">
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Education</a>
-        <a href="#certs">Certifications</a>
-        <a href="#gaming">Gaming</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="nav-actions">
-        <button class="kbd-hint" id="paletteBtn" aria-label="Open command palette">Search <kbd>Ctrl</kbd><kbd>K</kbd></button>
-        <a class="icon-btn" href="https://github.com/Equinox2005" target="_blank" rel="noopener" aria-label="GitHub profile">
-          <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-        </a>
-        <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
-          <svg id="iconMoon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
-          <svg id="iconSun" viewBox="0 0 24 24" style="display:none"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1Zm0-16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm9 8a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2h1ZM4 11a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2h1Zm14.66-6.66a1 1 0 0 1 0 1.41l-.7.71a1 1 0 1 1-1.42-1.41l.71-.71a1 1 0 0 1 1.41 0ZM7.46 16.54a1 1 0 0 1 0 1.41l-.71.71a1 1 0 0 1-1.41-1.41l.7-.71a1 1 0 0 1 1.42 0Zm11.2 2.12a1 1 0 0 1-1.41 0l-.71-.7a1 1 0 0 1 1.42-1.42l.7.71a1 1 0 0 1 0 1.41ZM7.46 7.46a1 1 0 0 1-1.42 0l-.7-.71A1 1 0 0 1 6.75 5.34l.71.7a1 1 0 0 1 0 1.42Z"/></svg>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ─── Hero ────────────────────────────────────────────── -->
-  <section class="hero" id="top">
-    <div class="hero-grid">
-      <div>
-        <div class="badge-live"><span class="pulse"></span>Software Engineer @ PNC</div>
-        <h1>Hamza<br/><span class="grad">Al Ebousi</span></h1>
-        <div class="hero-role"><span id="typeTarget"></span><span class="caret">|</span></div>
-        <p class="hero-desc">
-          Pitt CS graduate now engineering software at PNC. I build ML platforms,
-          browser extensions with on-device AI, and full-stack applications —
-          from model training to cloud deployment.
-        </p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">
-            View my work
-            <svg viewBox="0 0 24 24"><path d="M13.17 5.17a1 1 0 0 1 1.41 0l6.13 6.12a1 1 0 0 1 0 1.42l-6.13 6.12a1 1 0 0 1-1.41-1.41L17.59 13H4a1 1 0 1 1 0-2h13.59l-4.42-4.42a1 1 0 0 1 0-1.41Z"/></svg>
-          </a>
-          <a href="https://github.com/Equinox2005" target="_blank" rel="noopener" class="btn btn-ghost">
-            <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            GitHub
-          </a>
-          <button class="btn btn-ghost" id="copyEmail">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm8 7L4.5 6.2a.5.5 0 0 0-.5.44V18h16V6.64a.5.5 0 0 0-.5-.44L12 11Z"/></svg>
-            Copy email
-          </button>
-        </div>
-      </div>
-      <div class="snap reveal">
-        <div class="snap-title">Right now</div>
-        <div class="snap-row"><span class="emoji">💼</span><span>Engineering software at <strong>PNC</strong></span></div>
-        <div class="snap-row"><span class="emoji">🎓</span><span>Pitt CS grad, class of <strong>2026</strong></span></div>
-        <div class="snap-row"><span class="emoji">📍</span><span>Based in <strong>Pittsburgh, PA</strong></span></div>
-        <div class="snap-row"><span class="emoji">🛠️</span><span>Building side projects on <a href="https://github.com/Equinox2005" target="_blank" rel="noopener">GitHub</a></span></div>
-        <div class="snap-row"><span class="emoji">🎮</span><span>Probably in a ranked queue after hours</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Stats ───────────────────────────────────────────── -->
-  <section class="stats reveal">
-    <div class="stats-inner">
-      <div class="stat"><div class="stat-num" data-count="4">0</div><div class="stat-label">Projects shipped</div></div>
-      <div class="stat"><div class="stat-num" data-count="4">0</div><div class="stat-label">Certifications</div></div>
-      <div class="stat"><div class="stat-num" data-count="81" data-suffix="%">0</div><div class="stat-label">ML model accuracy</div></div>
-      <div class="stat"><div class="stat-num" data-count="2026">0</div><div class="stat-label">Pitt CS graduate</div></div>
-    </div>
-  </section>
-
-  <!-- ─── Experience ──────────────────────────────────────── -->
-  <section id="experience" class="reveal">
-    <div class="section-head">
-      <div class="eyebrow">01 · Experience</div>
-      <h2 class="section-title">Where I work</h2>
-    </div>
-    <div class="timeline">
-      <div class="t-item">
-        <div class="t-card">
-          <div class="t-badge"><span class="pulse"></span>Current</div>
-          <div class="t-top">
-            <div class="t-role">Software Engineer</div>
-            <div class="t-date">Jul 2026 — Present</div>
-          </div>
-          <div class="t-org"><strong>PNC</strong> · via TEKsystems Rising Talent Program · Pittsburgh, PA</div>
-          <ul class="t-desc">
-            <li>Selected for an intensive, instructor-led engineering program covering PNC's enterprise stack, transitioning into a full-time Software Engineer Associate role.</li>
-            <li>Building event-driven backend services with Java, Spring Boot, and Apache Kafka, backed by Oracle DB with Spring Data JPA.</li>
-            <li>Developing React front ends and deploying containerized services to OpenShift/Kubernetes with Docker and Bitbucket CI/CD pipelines.</li>
-            <li>Applying enterprise engineering practice: JUnit/Mockito/Selenium testing, application security testing, and infrastructure-as-code with Ansible and Terraform.</li>
-          </ul>
-          <div class="chips">
-            <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Apache Kafka</span>
-            <span class="chip">React</span><span class="chip">Oracle DB</span><span class="chip">OpenShift</span>
-            <span class="chip">Kubernetes</span><span class="chip">Docker</span><span class="chip">CI/CD</span><span class="chip">Terraform</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Projects ────────────────────────────────────────── -->
-  <section id="projects" class="reveal">
-    <div class="section-head">
-      <div class="eyebrow">02 · Projects</div>
-      <h2 class="section-title">What I've built</h2>
-      <p class="section-sub">A mix of machine learning systems, browser tooling, and full-stack products — all open source on <a href="https://github.com/Equinox2005" target="_blank" rel="noopener" style="color:var(--accent-2);text-decoration:none;font-weight:600;">GitHub</a>.</p>
-    </div>
-    <div class="proj-grid">
-
-      <div class="proj wide">
-        <div class="proj-tag"><span class="star">★</span> Featured · Chrome extension · On-device AI</div>
-        <div class="proj-title">Professor Ratings for Pitt</div>
-        <div class="proj-desc">
-          Chrome extension (MV3) that injects RateMyProfessors ratings directly into Pitt's class search, with
-          AI-written review summaries generated 100% on-device. Six-strategy DOM detection survives PeopleSoft
-          re-renders; a rate-limited, cached service worker queries RMP's GraphQL endpoint; and a local
-          Qwen2.5-0.5B model running through WebGPU (Transformers.js + ONNX Runtime) rewrites locally-computed
-          sentiment stats into readable summaries — no servers, no tracking, nothing leaves the machine.
-        </div>
-        <div class="chips">
-          <span class="chip">JavaScript</span><span class="chip">Chrome MV3</span><span class="chip">WebGPU</span>
-          <span class="chip">Transformers.js</span><span class="chip">ONNX Runtime</span><span class="chip">LLM</span>
-          <span class="chip">GraphQL</span><span class="chip">NLP</span>
-        </div>
-        <div class="proj-links">
-          <a href="https://github.com/Equinox2005/professor-ratings-for-pitt" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            GitHub
-          </a>
-        </div>
-      </div>
-
-      <div class="proj">
-        <div class="proj-tag">ML platform · Live demo</div>
-        <div class="proj-title">ML Sentiment Analysis Platform</div>
-        <div class="proj-desc">
-          Full-stack model-serving platform. Logistic Regression classifier trained on 1.6M tweets (81.8% accuracy)
-          with TF-IDF vectorization. FastAPI backend with real-time, batch, and comparison endpoints; React dashboard
-          with CSV bulk upload, word clouds, and radar comparisons. Fully containerized with Docker.
-        </div>
-        <div class="chips">
-          <span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">FastAPI</span>
-          <span class="chip">React</span><span class="chip">Docker</span>
-        </div>
-        <div class="proj-links">
-          <a href="https://github.com/Equinox2005/ml-sentiment-platform" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            GitHub
-          </a>
-          <a href="https://sentiment-dashboard-nr3s.onrender.com/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3ZM5 5h6v2H7v10h10v-4h2v6H5V5Z"/></svg>
-            Live demo
-          </a>
-        </div>
-        <div class="proj-note">Demo may take ~1 min to spin up on first visit.</div>
-      </div>
-
-      <div class="proj">
-        <div class="proj-tag">NLP · Data pipeline</div>
-        <div class="proj-title">YouTube Sentiment Analyzer</div>
-        <div class="proj-desc">
-          End-to-end pipeline comparing video transcript sentiment against audience comment sentiment using
-          Naive Bayes, TF-IDF, and the YouTube Data API across 5,000+ comments per video.
-        </div>
-        <div class="chips">
-          <span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">NLP</span>
-          <span class="chip">YouTube API</span>
-        </div>
-        <div class="proj-links">
-          <a href="https://github.com/Equinox2005/youtube-sentiment-analysis" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            GitHub
-          </a>
-        </div>
-      </div>
-
-      <div class="proj wide">
-        <div class="proj-tag">ML · Finance · Real-time</div>
-        <div class="proj-title">Live Ticker Sentiment Trader</div>
-        <div class="proj-desc">
-          Real-time sentiment-driven trading system that streams Reddit discussions and classifies market signals
-          using VADER, Hugging Face Transformers, and PyTorch, surfaced through a live GUI dashboard.
-        </div>
-        <div class="chips">
-          <span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">Transformers</span>
-          <span class="chip">Reddit API</span>
-        </div>
-        <div class="proj-links">
-          <a href="https://github.com/Equinox2005/sentiment_trader" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            GitHub
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ─── Education ───────────────────────────────────────── -->
-  <section id="education" class="reveal">
-    <div class="section-head">
-      <div class="eyebrow">03 · Education</div>
-      <h2 class="section-title">Where I studied</h2>
-    </div>
-    <div class="edu-card">
-      <img src="pitt_logo.svg" alt="University of Pittsburgh" class="edu-logo"/>
-      <div>
-        <div class="edu-school">University of Pittsburgh</div>
-        <div class="edu-degree">B.S. Computer Science · Minor in Mathematics</div>
-        <div class="grad-badge">
-          <svg viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3Zm-7 9.72v4.28c0 1.1 3.13 3 7 3s7-1.9 7-3v-4.28l-7 3.82-7-3.82Z"/></svg>
-          Graduated · April 2026
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Certifications ──────────────────────────────────── -->
-  <section id="certs" class="reveal">
-    <div class="section-head">
-      <div class="eyebrow">04 · Certifications</div>
-      <h2 class="section-title">Verified skills</h2>
-    </div>
-    <div class="cert-grid">
-      <div class="cert">
-        <img src="aws-saa.png" alt="AWS Solutions Architect Associate"/>
-        <div class="cert-name">AWS Solutions Architect Associate</div>
-        <div class="cert-year">2025</div>
-        <a href="https://www.credly.com/badges/752d0b3d-7a08-444c-ab1b-6d8e94d5790d/public_url" target="_blank" rel="noopener">Verify →</a>
-      </div>
-      <div class="cert">
-        <img src="aws.png" alt="AWS Cloud Practitioner"/>
-        <div class="cert-name">AWS Cloud Practitioner CLF-C02</div>
-        <div class="cert-year">2025</div>
-        <a href="https://www.credly.com/badges/84661dcf-5979-4e8c-9116-e18e7612cf6d/public_url" target="_blank" rel="noopener">Verify →</a>
-      </div>
-      <div class="cert">
-        <img src="isc2cc.png" alt="ISC2 Certified in Cybersecurity"/>
-        <div class="cert-name">ISC² Certified in Cybersecurity</div>
-        <div class="cert-year">2025</div>
-        <a href="https://www.credly.com/badges/53f11a00-35f6-481c-9d22-60482e6790cc/public_url" target="_blank" rel="noopener">Verify →</a>
-      </div>
-      <div class="cert">
-        <img src="metafrontend.png" alt="Meta Front-End Developer"/>
-        <div class="cert-name">Meta Front-End Developer</div>
-        <div class="cert-year">2024</div>
-        <a href="https://www.coursera.org/account/accomplishments/professional-cert/D3H7BRE3I379" target="_blank" rel="noopener">Verify →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Gaming ──────────────────────────────────────────── -->
-  <section id="gaming" class="reveal">
-    <div class="section-head">
-      <div class="eyebrow">05 · Off the clock</div>
-      <h2 class="section-title">Gaming profiles</h2>
-      <p class="section-sub">When I'm not shipping code, I'm grinding ranked.</p>
-    </div>
-    <div class="game-grid">
-      <div class="game">
-        <div class="game-name">League of Legends</div>
-        <img class="emblem" src="Diamond.png" alt="Diamond rank emblem"/>
-        <div class="game-rank">Diamond IV</div>
-        <div class="game-ign">Equinox#8496 · NA</div>
-        <a class="link" href="https://op.gg/lol/summoners/na/Equinox-8496" target="_blank" rel="noopener">View on OP.GG →</a>
-      </div>
-      <div class="game">
-        <div class="game-name">Valorant</div>
-        <img class="emblem" src="https://trackercdn.com/cdn/tracker.gg/valorant/icons/tiersv2/23.png" alt="Ascendant rank emblem"/>
-        <div class="game-rank">Ascendant 3</div>
-        <div class="game-ign">Equinox#8496</div>
-        <a class="link" href="https://tracker.gg/valorant/profile/riot/Equinox%238496/overview" target="_blank" rel="noopener">View on Tracker.gg →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Contact ─────────────────────────────────────────── -->
-  <section id="contact" class="reveal">
-    <div class="contact-card">
-      <h2>Get in touch</h2>
-      <p>Always happy to talk projects, ML, cloud, or anything software.</p>
-      <div class="contact-actions">
-        <a href="mailto:hamzalebousi@gmail.com" class="btn btn-primary">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm8 7L4.5 6.2a.5.5 0 0 0-.5.44V18h16V6.64a.5.5 0 0 0-.5-.44L12 11Z"/></svg>
-          hamzalebousi@gmail.com
-        </a>
-        <a href="https://www.linkedin.com/in/hamza-al-eb2005/" target="_blank" rel="noopener" class="btn btn-ghost">
-          <svg viewBox="0 0 24 24"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg>
-          LinkedIn
-        </a>
-        <a href="https://github.com/Equinox2005" target="_blank" rel="noopener" class="btn btn-ghost">
-          <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-          github.com/Equinox2005
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="copy">© 2026 Hamza Al Ebousi · Pittsburgh, PA · 412-853-6831</div>
-    <div class="socials">
-      <a class="icon-btn" href="https://github.com/Equinox2005" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-      </a>
-      <a class="icon-btn" href="https://www.linkedin.com/in/hamza-al-eb2005/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg>
-      </a>
-      <a class="icon-btn" href="mailto:hamzalebousi@gmail.com" aria-label="Email">
-        <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm8 7L4.5 6.2a.5.5 0 0 0-.5.44V18h16V6.64a.5.5 0 0 0-.5-.44L12 11Z"/></svg>
-      </a>
-    </div>
-  </footer>
-
-  <button class="icon-btn" id="toTop" aria-label="Back to top">
-    <svg viewBox="0 0 24 24"><path d="M12 5.17 4.88 12.3l1.41 1.4L11 8.99V20h2V8.99l4.71 4.71 1.41-1.4L12 5.17Z"/></svg>
-  </button>
-
-  <!-- ─── Command palette ─────────────────────────────────── -->
-  <div class="palette-overlay" id="paletteOverlay">
-    <div class="palette" role="dialog" aria-label="Command palette">
-      <input id="paletteInput" type="text" placeholder="Jump to a section or link…" autocomplete="off"/>
-      <div class="palette-list" id="paletteList"></div>
-    </div>
+  <div class="intro">
+    <p>I work on backend services at PNC, mostly Java, Spring Boot and Kafka. I finished my B.S. in Computer Science at the University of Pittsburgh in April 2026.</p>
+    <p>On my own time I build browser extensions and machine learning projects. The biggest one is a Chrome extension that puts RateMyProfessors ratings into Pitt's class search.</p>
   </div>
 
-  <div id="toast" role="status"></div>
+  <section id="experience">
+    <h2>Experience</h2>
+    <article class="entry">
+      <div class="row">
+        <h3>Software Engineer, PNC</h3>
+        <span class="when">Jul 2026 – present</span>
+      </div>
+      <p>Started in TEKsystems' Rising Talent program, an instructor-led track on PNC's stack, on the way to a full-time Software Engineer Associate role.</p>
+      <ul>
+        <li>Event-driven backend services in Java, Spring Boot and Apache Kafka, on Oracle with Spring Data JPA.</li>
+        <li>React front ends, deployed as containers to OpenShift and Kubernetes through Bitbucket CI/CD.</li>
+        <li>Testing with JUnit, Mockito and Selenium, application security testing, and infrastructure as code with Ansible and Terraform.</li>
+      </ul>
+    </article>
+  </section>
 
-  <script>
-    /* ── Theme ──────────────────────────────────────────── */
-    const root = document.documentElement;
-    const themeBtn = document.getElementById('themeBtn');
-    const iconMoon = document.getElementById('iconMoon');
-    const iconSun = document.getElementById('iconSun');
-    function setTheme(t) {
-      root.setAttribute('data-theme', t);
-      localStorage.setItem('theme', t);
-      iconMoon.style.display = t === 'dark' ? '' : 'none';
-      iconSun.style.display = t === 'dark' ? 'none' : '';
-    }
-    setTheme(localStorage.getItem('theme') || 'dark');
-    themeBtn.addEventListener('click', () =>
-      setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+  <section id="projects">
+    <h2>Projects</h2>
 
-    /* ── Typing effect ──────────────────────────────────── */
-    const roles = ['Software Engineer @ PNC', 'ML & NLP Builder', 'Full-Stack Developer', 'AWS Solutions Architect', 'Pitt CS Graduate'];
-    const typeEl = document.getElementById('typeTarget');
-    let ri = 0, ci = 0, deleting = false;
-    (function type() {
-      const word = roles[ri];
-      typeEl.textContent = word.slice(0, ci);
-      if (!deleting && ci < word.length) { ci++; setTimeout(type, 55); }
-      else if (!deleting) { deleting = true; setTimeout(type, 1800); }
-      else if (ci > 0) { ci--; setTimeout(type, 28); }
-      else { deleting = false; ri = (ri + 1) % roles.length; setTimeout(type, 300); }
-    })();
+    <article class="entry">
+      <div class="row">
+        <h3>Professor Ratings for Pitt</h3>
+        <span class="links"><a href="https://github.com/Equinox2005/professor-ratings-for-pitt">Code</a></span>
+      </div>
+      <p>A Chrome extension that shows each instructor's RateMyProfessors rating next to their name in Pitt's class search. Click a rating to see what students say, summarized by a small language model (Qwen2.5-0.5B) that runs locally in the browser through WebGPU.</p>
+      <p>Pitt's class search is a PeopleSoft page that re-renders all the time, so the extension finds instructor cells six different ways and re-attaches whenever the table changes. Rating lookups go through a cached, rate-limited service worker.</p>
+      <p class="stack">JavaScript, Chrome MV3, WebGPU, Transformers.js, ONNX Runtime</p>
+      <img class="shot" src="img/professor-ratings.jpg" width="1280" height="800" loading="lazy"
+           alt="The extension's panel for one professor in Pitt's class search, with overall rating, difficulty, would-take-again rate and grouped student comments.">
+    </article>
 
-    /* ── Scroll reveal ──────────────────────────────────── */
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    <article class="entry">
+      <div class="row">
+        <h3>ML Sentiment Analysis Platform</h3>
+        <span class="links">
+          <a href="https://github.com/Equinox2005/ml-sentiment-platform">Code</a>
+          <a href="https://sentiment-dashboard-nr3s.onrender.com/">Live demo</a>
+        </span>
+      </div>
+      <p>A logistic regression model trained on 1.6 million tweets with TF-IDF features (81.8% accuracy), served by a FastAPI backend with single, batch and side-by-side endpoints. The React dashboard takes CSV uploads and shows word clouds and comparison charts. The whole thing runs in Docker.</p>
+      <p class="stack">Python, scikit-learn, FastAPI, React, Docker</p>
+      <p class="note">The demo goes to sleep when nobody is using it, so the first load can take about a minute.</p>
+    </article>
 
-    /* ── Animated counters ──────────────────────────────── */
-    const counterIO = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        counterIO.unobserve(e.target);
-        const target = +e.target.dataset.count;
-        const suffix = e.target.dataset.suffix || '';
-        const dur = 1400, start = performance.now();
-        (function tick(now) {
-          const p = Math.min((now - start) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          e.target.textContent = Math.round(target * eased) + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-        })(start);
-      });
-    }, { threshold: 0.4 });
-    document.querySelectorAll('.stat-num').forEach(el => counterIO.observe(el));
+    <article class="entry">
+      <div class="row">
+        <h3>YouTube Sentiment Analyzer</h3>
+        <span class="links"><a href="https://github.com/Equinox2005/youtube-sentiment-analysis">Code</a></span>
+      </div>
+      <p>Compares the sentiment of a video's transcript with the sentiment of its comment section, using the YouTube Data API and a Naive Bayes classifier on TF-IDF features over 5,000+ comments per video.</p>
+      <p class="stack">Python, scikit-learn, YouTube Data API</p>
+    </article>
 
-    /* ── Scroll progress + nav active + back-to-top ─────── */
-    const progress = document.getElementById('progress');
-    const toTop = document.getElementById('toTop');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const sections = [...document.querySelectorAll('section[id]')];
-    window.addEventListener('scroll', () => {
-      const h = document.documentElement;
-      progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
-      toTop.classList.toggle('show', h.scrollTop > 600);
-      const y = h.scrollTop + 120;
-      let current = '';
-      sections.forEach(s => { if (y >= s.offsetTop) current = s.id; });
-      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
-    }, { passive: true });
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    <article class="entry">
+      <div class="row">
+        <h3>Live Ticker Sentiment Trader</h3>
+        <span class="links"><a href="https://github.com/Equinox2005/sentiment_trader">Code</a></span>
+      </div>
+      <p>Streams Reddit discussion about stock tickers, scores each post with VADER and a Hugging Face transformer model, and plots the sentiment for each ticker in a live desktop dashboard.</p>
+      <p class="stack">Python, PyTorch, Hugging Face Transformers, Reddit API</p>
+    </article>
+  </section>
 
-    /* ── Cursor spotlight on project cards ──────────────── */
-    document.querySelectorAll('.proj').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
-    });
+  <section id="education">
+    <h2>Education</h2>
+    <article class="entry">
+      <div class="row">
+        <h3>University of Pittsburgh</h3>
+        <span class="when">Apr 2026</span>
+      </div>
+      <p>B.S. in Computer Science, minor in Mathematics</p>
+    </article>
+  </section>
 
-    /* ── Copy email + toast ─────────────────────────────── */
-    const toast = document.getElementById('toast');
-    let toastTimer;
-    function showToast(msg) {
-      toast.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-    }
-    document.getElementById('copyEmail').addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText('hamzalebousi@gmail.com'); showToast('Email copied to clipboard ✓'); }
-      catch { showToast('hamzalebousi@gmail.com'); }
-    });
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <ul class="plain">
+      <li><span>AWS Certified Solutions Architect – Associate</span><span class="when">2025 · <a href="https://www.credly.com/badges/752d0b3d-7a08-444c-ab1b-6d8e94d5790d/public_url">Verify</a></span></li>
+      <li><span>AWS Certified Cloud Practitioner</span><span class="when">2025 · <a href="https://www.credly.com/badges/84661dcf-5979-4e8c-9116-e18e7612cf6d/public_url">Verify</a></span></li>
+      <li><span>ISC2 Certified in Cybersecurity</span><span class="when">2025 · <a href="https://www.credly.com/badges/53f11a00-35f6-481c-9d22-60482e6790cc/public_url">Verify</a></span></li>
+      <li><span>Meta Front-End Developer</span><span class="when">2024 · <a href="https://www.coursera.org/account/accomplishments/professional-cert/D3H7BRE3I379">Verify</a></span></li>
+    </ul>
+  </section>
 
-    /* ── Command palette ────────────────────────────────── */
-    const overlay = document.getElementById('paletteOverlay');
-    const input = document.getElementById('paletteInput');
-    const list = document.getElementById('paletteList');
-    const commands = [
-      { icon: '💼', label: 'Experience — PNC', action: () => location.hash = '#experience' },
-      { icon: '🛠️', label: 'Projects', action: () => location.hash = '#projects' },
-      { icon: '🎓', label: 'Education — Pitt', action: () => location.hash = '#education' },
-      { icon: '📜', label: 'Certifications', action: () => location.hash = '#certs' },
-      { icon: '🎮', label: 'Gaming profiles', action: () => location.hash = '#gaming' },
-      { icon: '✉️', label: 'Contact', action: () => location.hash = '#contact' },
-      { icon: '🐙', label: 'Open GitHub — Equinox2005', hint: 'external', action: () => window.open('https://github.com/Equinox2005', '_blank') },
-      { icon: '💼', label: 'Open LinkedIn', hint: 'external', action: () => window.open('https://www.linkedin.com/in/hamza-al-eb2005/', '_blank') },
-      { icon: '📋', label: 'Copy email address', action: () => document.getElementById('copyEmail').click() },
-      { icon: '🌓', label: 'Toggle theme', hint: 'dark/light', action: () => themeBtn.click() },
-    ];
-    let filtered = commands, sel = 0;
-    function renderList() {
-      list.innerHTML = '';
-      filtered.forEach((c, i) => {
-        const el = document.createElement('div');
-        el.className = 'palette-item' + (i === sel ? ' sel' : '');
-        el.innerHTML = `<span class="pi-icon">${c.icon}</span><span>${c.label}</span>` + (c.hint ? `<span class="hint">${c.hint}</span>` : '');
-        el.addEventListener('click', () => { closePalette(); c.action(); });
-        list.appendChild(el);
-      });
-    }
-    function openPalette() { overlay.classList.add('open'); input.value = ''; filtered = commands; sel = 0; renderList(); input.focus(); }
-    function closePalette() { overlay.classList.remove('open'); }
-    document.getElementById('paletteBtn').addEventListener('click', openPalette);
-    overlay.addEventListener('click', e => { if (e.target === overlay) closePalette(); });
-    input.addEventListener('input', () => {
-      const q = input.value.toLowerCase();
-      filtered = commands.filter(c => c.label.toLowerCase().includes(q));
-      sel = 0; renderList();
-    });
-    window.addEventListener('keydown', e => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); overlay.classList.contains('open') ? closePalette() : openPalette(); }
-      if (!overlay.classList.contains('open')) return;
-      if (e.key === 'Escape') closePalette();
-      if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(sel + 1, filtered.length - 1); renderList(); }
-      if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(sel - 1, 0); renderList(); }
-      if (e.key === 'Enter' && filtered[sel]) { closePalette(); filtered[sel].action(); }
-    });
-  </script>
+  <section id="outside-work">
+    <h2>Outside work</h2>
+    <ul class="plain">
+      <li><span>League of Legends, Diamond IV, Equinox#8496 (NA)</span><a href="https://op.gg/lol/summoners/na/Equinox-8496">OP.GG</a></li>
+      <li><span>Valorant, Ascendant 3, Equinox#8496</span><a href="https://tracker.gg/valorant/profile/riot/Equinox%238496/overview">Tracker.gg</a></li>
+    </ul>
+  </section>
+
+  <footer>Hamza Al Ebousi · Pittsburgh, PA · 412-853-6831</footer>
+</main>
 </body>
 </html>
